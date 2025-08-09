@@ -1,0 +1,386 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nạp Tiền</title>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <style>
+        :root {
+            --bg-gradient-onyx: linear-gradient(to bottom right, hsl(240, 1%, 25%) 3%, hsl(0, 0%, 19%) 97%);
+            --bg-gradient-jet: linear-gradient(to bottom right, hsla(240, 1%, 18%, 0.251) 0%, hsla(240, 2%, 11%, 0) 100%), hsl(240, 2%, 13%);
+            --bg-gradient-yellow-1: linear-gradient(to bottom right, hsl(45, 100%, 71%) 0%, hsla(36, 100%, 69%, 0) 50%);
+            --bg-gradient-yellow-2: linear-gradient(135deg, hsla(45, 100%, 71%, 0.251) 0%, hsla(35, 100%, 68%, 0) 59.86%), hsl(240, 2%, 13%);
+            --border-gradient-onyx: linear-gradient(to bottom right, hsl(0, 0%, 25%) 0%, hsla(0, 0%, 25%, 0) 50%);
+            --text-gradient-yellow: linear-gradient(to right, hsl(45, 100%, 72%), hsl(35, 100%, 68%));
+            --jet: hsl(0, 0%, 22%);
+            --onyx: hsl(240, 1%, 17%);
+            --eerie-black-1: hsl(240, 2%, 13%);
+            --eerie-black-2: hsl(240, 2%, 12%);
+            --smoky-black: hsl(0, 0%, 7%);
+            --white-1: hsl(0, 0%, 100%);
+            --white-2: hsl(0, 0%, 98%);
+            --orange-yellow-crayola: hsl(45, 100%, 72%);
+            --vegas-gold: hsl(45, 54%, 58%);
+            --light-gray: hsl(0, 0%, 84%);
+            --light-gray-70: hsla(0, 0%, 84%, 0.7);
+            --bittersweet-shimmer: hsl(0, 43%, 51%);
+            --bg-gradient-tab-active: linear-gradient(to bottom right, hsl(45, 100%, 71%) 0%, hsl(36, 100%, 69%) 100%);
+            --bg-content: hsl(240, 1%, 20%);
+            --ff-poppins: 'Poppins', sans-serif;
+            --fs-1: 24px;
+            --fs-2: 18px;
+            --fs-3: 17px;
+            --fs-4: 16px;
+            --fs-5: 15px;
+            --fs-6: 14px;
+            --fs-7: 13px;
+            --fs-8: 11px;
+            --fw-300: 300;
+            --fw-400: 400;
+            --fw-500: 500;
+            --fw-600: 600;
+            --shadow-1: -4px 8px 24px hsla(0, 0%, 0%, 0.25);
+            --shadow-2: 0 16px 30px hsla(0, 0%, 0%, 0.25);
+            --shadow-3: 0 16px 40px hsla(0, 0%, 0%, 0.25);
+            --shadow-4: 0 25px 50px hsla(0, 0%, 0%, 0.15);
+            --shadow-5: 0 24px 80px hsla(0, 0%, 0%, 0.25);
+            --transition-1: 0.25s ease;
+            --transition-2: 0.5s ease-in-out;
+        }
+        
+        body {
+            font-family: var(--ff-poppins);
+            margin: 0;
+            padding: 0;
+            background: var(--bg-gradient-onyx);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            flex-direction: column;
+        }
+        
+        #back-button {
+            display: inline;
+            width: 15rem;
+            bottom: 41.5rem;
+            left: 0;
+            position: fixed;
+            margin: 10px 20px;
+            padding: 10px 20px;
+            background: var(--bg-gradient-tab-active);
+            color: var(--text-main);
+            font-size: 16px;
+            font-weight: bold;
+            text-transform: uppercase;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: var(--transition);
+            box-shadow: var(--box-shadow);
+        }
+        
+        #back-button:hover {
+            background: hsl(36, 100%, 69%);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 15px hsla(0, 0%, 0%, 0.3);
+        }
+        
+        #back-button:active {
+            transform: translateY(2px);
+            box-shadow: 0 2px 8px hsla(0, 0%, 0%, 0.2);
+        }
+        
+        .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            background-color: var(--onyx);
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: var(--shadow-2);
+            width: 85%;
+            max-width: 1200px;
+            gap: 20px;
+            position: relative;
+            top: 1.5rem;
+            margin: 0 auto; /* Center the container */
+        }
+        
+        .form-container, .info-container {
+            width: 48%;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: var(--shadow-1);
+        }
+        
+        .form-container {
+            background-color: var(--white-2);
+        }
+        
+        .info-container {
+            background-color: var(--white-2);
+            display: none;
+        }
+        
+        h1, h2 {
+            text-align: center;
+            color: var(--jet);
+        }
+        
+        label {
+            font-weight: bold;
+            color: var(--jet);
+            margin-bottom: 8px;
+            display: block;
+        }
+        
+        input, button, textarea {
+            width: 94%;
+            padding: 12px;
+            margin-bottom: 15px;
+            border: 1px solid var(--eerie-black-1);
+            border-radius: 8px;
+            font-size: var(--fs-3);
+        }
+        
+        button {
+            background-color: var(--orange-yellow-crayola);
+            color: var(--white-1);
+            border: none;
+            width: 100%;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            font-weight: var(--fw-500);
+        }
+        
+        button:hover {
+            background-color: var(--vegas-gold);
+        }
+        
+        button:disabled {
+            background-color: #cccccc;
+            cursor: not-allowed;
+        }
+        
+        .qr-container img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 8px;
+        }
+        
+        .highlight {
+            font-weight: bold;
+            color: var(--bittersweet-shimmer);
+            text-align: center;
+            display: block;
+        }
+        
+        .text {
+            position: absolute;
+            bottom: -35px;
+            left: 50%;
+            transform: translateX(-50%);
+            text-align: center;
+            font-size: var(--fs-6);
+            color: var(--light-gray);
+            font-weight: var(--fw-300);
+            width: 100%;
+        }
+        
+        .text p {
+            margin: 0;
+            color: hsl(45, 100%, 72%);
+            font-size: var(--fs-6);
+            letter-spacing: 0.5px;
+        }
+        
+        .text {
+            color: var(--orange-yellow-crayola);
+            font-weight: bold;
+        }
+        
+        /* Responsive Adjustments */
+
+
+        @media (max-width: 768px) {
+            /* Thay đổi layout trên điện thoại: dạng 1 cột */
+            .container {
+                flex-direction: column;
+                gap: 10px;
+                position: relative;
+                top: 20rem;
+                margin: 0 auto; 
+            }
+        
+            .form-container, .info-container {
+                width: 95%; /* Chiều rộng gần 100% */
+                max-width: 600px;
+                padding: 20px;
+                border-radius: 10px;
+                box-shadow: var(--shadow-1);
+                position: relative;
+                left: -5px;
+            }
+        
+            /* Khi thông tin chuyển khoản hiển thị, vẫn là 1 cột */
+            #bankInfo {
+                display: block; /* Hiển thị thông tin chuyển khoản */
+            }
+        }
+        
+        @media (max-width: 480px) {
+            /* Thay đổi layout trên điện thoại: dạng 1 cột */
+            .container {
+                flex-direction: column;
+                gap: 10px;
+                position: relative;
+                top: 20rem;
+            }
+        
+            .form-container, .info-container {
+                width: 95%; /* Chiều rộng gần 100% */
+                max-width: 600px; /* Giới hạn chiều rộng tối đa */
+                padding: 20px;
+                border-radius: 10px;
+                box-shadow: var(--shadow-1);
+                position: relative;
+                left: -5px; /* Hủy bỏ dịch chuyển left */
+            }
+        
+            /* Khi thông tin chuyển khoản hiển thị, vẫn là 1 cột */
+            #bankInfo {
+                display: block; /* Hiển thị thông tin chuyển khoản */
+            }
+        }
+        
+
+    </style>
+</head>
+<body><button id="back-button" onclick="window.location.href='./index.html' ">Quay lại trang chính</button>
+
+    <div class="container">    
+        <!-- Phần nhập liệu (bên trái) -->
+        <div class="form-container">
+            <h1>Nạp Tiền</h1>
+            <form id="napTienForm">
+                <label for="username">Tên người dùng:</label>
+                <input type="text" id="username" placeholder="Tên người dùng..." readonly required>
+                
+                <label for="amount">Số tiền nạp:</label>
+                <input type="number" id="amount" placeholder="Nhập số tiền cần nạp..." required min="1" step="1">
+                
+                <label for="note">Ghi chú:</label>
+                <textarea id="note" placeholder="Nội dung..." disabled></textarea>
+                
+                <button type="submit">Hiển thị thông tin chuyển khoản</button>
+                <button type="button" id="sendRequestBtn" disabled>Gửi duyệt</button>
+                
+            </form>
+            
+        </div>
+
+        <div class="text">
+            <p>Copyright &copy; 2024 Website được phát triển bởi Tiendev </p>  
+        </div>
+        
+        <!-- Phần thông tin tài khoản (bên phải) -->
+        <div class="info-container" id="bankInfo">
+            <h2>Thông tin chuyển khoản</h2>
+            <div class="qr-container">
+                <img height="300" width="200" src="./bank.jpg" alt="Logo MBBank">
+            </div>
+            <p><b>Số tài khoản:</b> <span id="bankAccount">02002310200099</span></p>
+            <p><b>Chủ tài khoản:</b> <span id="accountName">NGUYEN NAM TIEN</span></p>
+            <p><b>Số tiền nạp:</b> <span id="transferAmount"></span> VND</p>
+            <p><b>Nội dung:</b> <span id="transferNote"></span></p>
+            <p><span class="highlight">Vui lòng chuyển đúng nội dung để tránh nhầm lẫn!</span></p>
+        </div>
+    </div>
+    
+
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            const usernameInput = document.getElementById("username");
+            const currentUser = JSON.parse(localStorage.getItem("currentUser"));
+            const sendRequestBtn = document.getElementById("sendRequestBtn");
+            let isRequestSent = false; // Trạng thái đã gửi yêu cầu
+
+            // Hiển thị tên người dùng
+            if (currentUser) {
+                usernameInput.value = currentUser.name;
+            } else {
+                alert("Vui lòng đăng nhập trước khi nạp tiền.");
+                window.location.href = "index.html";
+            }
+
+            // Hiển thị thông tin chuyển khoản
+            document.getElementById("napTienForm").addEventListener("submit", (e) => {
+                e.preventDefault();
+
+                const amount = parseInt(document.getElementById("amount").value);
+                if (!amount || amount <= 0) {
+                    Swal.fire("Lỗi", "Số tiền không hợp lệ!", "error");
+                    return;
+                }
+
+                const formattedAmount = new Intl.NumberFormat('vi-VN').format(amount);
+                const transferNote = `${currentUser.name}-${formattedAmount}`;
+
+                document.getElementById("note").value = transferNote;
+                document.getElementById("transferAmount").innerText = formattedAmount;
+                document.getElementById("transferNote").innerText = transferNote;
+                document.getElementById("bankInfo").style.display = 'block';
+
+                // Kích hoạt nút "Gửi duyệt"
+                sendRequestBtn.disabled = false;
+            });
+
+            // Gửi yêu cầu duyệt nạp tiền
+            sendRequestBtn.addEventListener("click", () => {
+                if (isRequestSent) {
+                    Swal.fire("Thông báo", "Bạn đã gửi yêu cầu. Không thể gửi lại!", "warning");
+                    return;
+                }
+
+                const amount = parseInt(document.getElementById("amount").value);
+                const request = {
+                    user: currentUser.name,
+                    amount,
+                    approved: false,
+                };
+
+                const requests = JSON.parse(localStorage.getItem("napTienRequests")) || [];
+                requests.push(request);
+                localStorage.setItem("napTienRequests", JSON.stringify(requests));
+
+                Swal.fire({
+                    title: "Thành công",
+                    text: "Yêu cầu nạp tiền đã được gửi! Quay lại trang chủ.",
+                    icon: "success",
+                    confirmButtonText: "OK",
+                }).then(() => {
+                    window.location.href = "index.html"; // Chuyển về trang chủ
+                });
+
+                isRequestSent = true; // Đánh dấu đã gửi yêu cầu
+                sendRequestBtn.disabled = true; // Vô hiệu hóa nút
+            });
+        });
+    </script>
+
+
+</body>
+
+<audio id="audio" autoplay loop>
+    <source src="./sounds/music.me.mp3" type="audio/mp3">
+</audio>
+<script>
+    window.onload = function() {
+        var audio = document.getElementById('audio');
+        audio.play();
+    }
+</script>
+
+</html>

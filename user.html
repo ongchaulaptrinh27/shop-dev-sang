@@ -1,0 +1,492 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Thông Tin Tài Khoản</title>
+  <link rel="stylesheet" href="style.css">
+
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+</head>
+<body>  
+      <button id="back-button" onclick="window.location.href='./index.html' ">Quay lại trang chính</button>
+  <div class="container">
+    <div class="tabs">
+      <div class="tab active" id="info-tab">Thông Tin Tài Khoản</div>
+      <div class="tab" id="password-tab">Đổi Mật Khẩu</div>
+      <div class="tab" id="history-tab">Lịch Sử Mua Code</div>
+    </div>
+
+    <div class="content" id="info-content">
+      <h2 class="text">Thông Tin Tài Khoản</h2>
+
+
+      <div class="form-group">
+        <label>Tên Khách Hàng:</label>
+        <input type="text" id="customer-name" readonly>
+      </div>
+      <div class="form-group">
+        <label>Email:</label>
+        <input type="email" id="customer-email" readonly>
+      </div>
+      <div class="form-group">
+        <label>Thời Gian Kích Hoạt:</label>
+        <input type="text" id="activation-time" readonly>
+      </div>
+      <div class="form-group">
+        <label>Tên Đăng Nhập:</label>
+        <input type="text" id="username" readonly>
+      </div>
+      <div class="form-group">
+        <label>Số Dư:</label>
+        <input type="text" id="balance" readonly>
+      </div>
+      <div class="form-group">
+        <label>Trạng Thái Tài Khoản:</label>
+        <input type="text" id="account-status" readonly>
+      </div>
+    </div>
+<!-- phần form mua codecode -->
+    <div class="content" id="history-content" style="display: none;">
+      <h2 class="text">Lịch Sử Mua Code</h2>
+      <div class="table-container">
+        <table>
+          <thead>
+            <tr>
+              <th>STT</th>
+              <th>Ảnh Code</th>
+              <th>Tên Code</th>
+              <th>Giá</th>
+              <th>Tải Xuống</th>
+              <th>Hành Động</th>
+            </tr>
+          </thead>
+          <tbody id="history-table">
+            <!-- Nội dung sẽ được thêm bằng JavaScript -->
+          </tbody>
+        </table>
+      </div>
+    </div>
+    
+  
+
+
+    <div class="content" id="password-content" style="display: none;">
+      <h2 class="text">Đổi Mật Khẩu</h2>
+      <div class="form-group">
+        <label>Mật Khẩu Cũ:</label>
+        <input type="password" id="old-password">
+      </div>
+      <div class="form-group">
+        <label>Mật Khẩu Mới:</label>
+        <input type="password" id="new-password">
+      </div>
+      <div class="form-group">
+        <label>Xác Nhận Mật Khẩu:</label>
+        <input type="password" id="confirm-password">
+      </div>
+      <button class="btn" id="change-password-btn">Đổi Mật Khẩu</button>
+    </div>
+  </div>
+  <p>Copyright &copy; 2024 Website được phát triển bởi Tiendev </p>  
+
+<!-- thêm thông báo khi xóa code -->
+<script>
+  // Gán sự kiện xóa sản phẩm
+
+</script>
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+
+      const currentUser = JSON.parse(localStorage.getItem("currentUser"));
+      if (currentUser) {
+        document.getElementById("customer-name").value = currentUser.name || "N/A";
+        document.getElementById("customer-email").value = currentUser.email || "N/A";
+        document.getElementById("activation-time").value = currentUser.activationTime || "N/A";
+        document.getElementById("username").value = currentUser.username || "N/A";
+        document.getElementById("balance").value = `${currentUser.balance || 0} đ`;
+        document.getElementById("account-status").value = currentUser.status || "N/A";
+      } else {
+        alert("Bạn cần đăng nhập!");
+        window.location.href = "index.html";
+      }
+
+      // Chuyển đổi giữa các tab
+      const infoTab = document.getElementById("info-tab");
+      const passwordTab = document.getElementById("password-tab");
+      const infoContent = document.getElementById("info-content");
+      const passwordContent = document.getElementById("password-content");
+
+      infoTab.addEventListener("click", () => {
+        infoTab.classList.add("active");
+        passwordTab.classList.remove("active");
+        infoContent.style.display = "block";
+        passwordContent.style.display = "none";
+      });
+
+      passwordTab.addEventListener("click", () => {
+        passwordTab.classList.add("active");
+        infoTab.classList.remove("active");
+        infoContent.style.display = "none";
+        passwordContent.style.display = "block";
+      });
+
+      // Xử lý đổi mật khẩu
+      document.getElementById("change-password-btn").addEventListener("click", () => {
+        const oldPassword = document.getElementById("old-password").value;
+        const newPassword = document.getElementById("new-password").value;
+        const confirmPassword = document.getElementById("confirm-password").value;
+
+        if (!oldPassword || !newPassword || !confirmPassword) {
+          alert("Vui lòng điền đầy đủ thông tin!");
+          return;
+        }
+
+        if (newPassword !== confirmPassword) {
+          alert("Mật khẩu xác nhận không khớp!");
+          return;
+        }
+
+        // Lấy thông tin tài khoản từ localStorage
+        const accounts = JSON.parse(localStorage.getItem("accounts")) || [];
+        const currentUser = JSON.parse(localStorage.getItem("currentUser"));
+
+        if (!currentUser) {
+          alert("Người dùng không tồn tại!");
+          return;
+        }
+
+        // Tìm tài khoản hiện tại
+        const accountIndex = accounts.findIndex(
+          (account) => account.email === currentUser.email
+        );
+
+        if (accountIndex === -1) {
+          alert("Không tìm thấy tài khoản!");
+          return;
+        }
+
+        // Kiểm tra mật khẩu cũ
+        if (accounts[accountIndex].password !== oldPassword) {
+          alert("Mật khẩu cũ không đúng!");
+          return;
+        }
+
+        // Cập nhật mật khẩu mới
+        accounts[accountIndex].password = newPassword;
+        localStorage.setItem("accounts", JSON.stringify(accounts));
+
+        // Cập nhật thông tin người dùng hiện tại
+        currentUser.password = newPassword;
+        localStorage.setItem("currentUser", JSON.stringify(currentUser));
+
+        alert("Mật khẩu đã được đổi thành công!");
+      });
+    });
+  </script>
+
+  <!-- liệt kê danh sách code user đã mua -->
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      // Quản lý tabs
+      const tabs = document.querySelectorAll(".tab");
+      const contents = document.querySelectorAll(".content");
+  
+      tabs.forEach((tab) => {
+        tab.addEventListener("click", () => {
+          tabs.forEach((t) => t.classList.remove("active"));
+          contents.forEach((content) => (content.style.display = "none"));
+  
+          tab.classList.add("active");
+          const targetId = tab.id.replace("-tab", "-content");
+          document.getElementById(targetId).style.display = "block";
+  
+          // Nếu là tab lịch sử, cập nhật danh sách
+          if (tab.id === "history-tab") {
+            renderPurchaseHistory();
+          }
+        });
+      });
+  
+      // Tự động hiển thị tab đầu tiên
+      document.getElementById("info-tab").click();
+  
+      // Hiển thị lịch sử mua hàng
+      const renderPurchaseHistory = () => {
+        const purchaseHistory = JSON.parse(localStorage.getItem("purchaseHistory")) || [];
+        const historyTable = document.getElementById("history-table");
+
+        historyTable.innerHTML = purchaseHistory.length
+            ? purchaseHistory.map(
+                  (item, index) => `
+                <tr>
+                  <td>${index + 1}</td>
+                  <td><img src="${item.image}" alt="${item.title}" width="50"></td>
+                  <td>${item.title}</td>
+                  <td>${item.price.toLocaleString()} VND</td>
+                  <td><a href="${item.downloadLink}" class="btn" target="_blank">Tải xuống</a></td>
+                  <td><button class="btn delete-btn" data-index="${index}">Xóa</button></td>
+                </tr>`
+              ).join("")
+            : `<tr><td colspan="6" style="text-align: center;">Không có lịch sử mua hàng</td></tr>`;
+
+
+  
+            
+
+        // Gán sự kiện xóa sản phẩm
+        document.querySelectorAll(".delete-btn").forEach((btn) => {
+          btn.addEventListener("click", (e) => {
+            const index = e.target.getAttribute("data-index");
+        
+            // Hiển thị SweetAlert2 confirm dialog
+            Swal.fire({
+              title: 'Bạn có chắc chắn muốn xóa mã này?',
+              text: "Suy nghĩ trước khi xóa nhé!",
+              icon: 'warning',
+              showCancelButton: true,
+              confirmButtonText: 'Đồng ý',
+              cancelButtonText: 'Hủy bỏ',
+            }).then((result) => {
+              if (result.isConfirmed) {
+                // Nếu người dùng xác nhận, xóa mã
+                deletePurchaseHistory(index);
+                Swal.fire(
+                  'Đã xóa!',
+                  'Mã đã được xóa khỏi lịch sử.',
+                  'success'
+                );
+              }
+            });
+          });
+        });
+    };
+
+    // Hàm xóa sản phẩm khỏi lịch sử
+    const deletePurchaseHistory = (index) => {
+        const purchaseHistory = JSON.parse(localStorage.getItem("purchaseHistory")) || [];
+        purchaseHistory.splice(index, 1); // Xóa sản phẩm theo index
+        localStorage.setItem("purchaseHistory", JSON.stringify(purchaseHistory));
+        renderPurchaseHistory(); // Cập nhật lại giao diện
+    };
+
+    renderPurchaseHistory();
+    });
+  </script>
+</body>
+</html>
+
+<style>
+  :root {
+    --bg-gradient-main: linear-gradient(to bottom right, hsl(240, 1%, 25%) 3%, hsl(0, 0%, 19%) 97%);
+    --bg-gradient-tab-active: linear-gradient(to bottom right, hsl(45, 100%, 71%) 0%, hsl(36, 100%, 69%) 100%);
+    --bg-content: hsl(240, 1%, 20%);
+    --bg-table-header: hsl(240, 1%, 25%);
+    --bg-table-row: hsl(240, 1%, 15%);
+    --text-main: hsl(0, 0%, 98%);
+    --text-highlight: hsl(45, 100%, 72%);
+    --border-light: hsl(0, 0%, 84%);
+    --box-shadow: 0 8px 24px hsla(0, 0%, 0%, 0.25);
+    --font-family: 'Poppins', sans-serif;
+    --transition: 0.3s ease;
+  }
+  
+  
+  body {
+    font-family: var(--font-family);
+    margin: 0;
+    padding: 0;
+    background: var(--bg-gradient-main);
+    color: var(--text-main);
+  }
+  
+  #back-button {
+    display: inline-block;
+    margin: 10px 20px;
+    padding: 10px 20px;
+    background: var(--bg-gradient-tab-active);
+    color: var(--text-main);
+    font-size: 16px;
+    font-weight: bold;
+    text-transform: uppercase;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: var(--transition);
+    box-shadow: var(--box-shadow);
+  }
+
+  #back-button:hover {
+    background: hsl(36, 100%, 69%);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 15px hsla(0, 0%, 0%, 0.3);
+  }
+
+  #back-button:active {
+    transform: translateY(2px);
+    box-shadow: 0 2px 8px hsla(0, 0%, 0%, 0.2);
+  }
+  .container {
+    max-width: 900px;
+    margin: 40px auto;
+    padding: 20px;
+    background: var(--bg-gradient-main);
+    border-radius: 12px;
+    box-shadow: var(--box-shadow);
+  }
+  
+  .tabs {
+    display: flex;
+    margin-bottom: 20px;
+    border-bottom: 2px solid var(--border-light);
+  }
+  p{
+    color: hsl(45, 100%, 72%);
+    text-align: center;
+    position: relative;
+  }
+  .tab {
+    flex: 1;
+    padding: 10px 20px;
+    cursor: pointer;
+    text-align: center;
+    color: var(--text-main);
+    font-weight: bold;
+    border-radius: 8px 8px 0 0;
+    transition: background-color var(--transition), color var(--transition);
+  }
+  
+  .tab.active {
+    background: var(--bg-gradient-tab-active);
+    color: var(--text-main);
+  }
+  
+  .content {
+    display: none;
+    padding: 20px;
+    background: var(--bg-content);
+    border-radius: 12px;
+    box-shadow: var(--box-shadow);
+    animation: fadeIn var(--transition);
+  }
+  
+  .content.active {
+    display: block;
+  }
+  
+  h2.text {
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 20px;
+    color: var(--text-highlight);
+  }
+  
+  .table-container {
+    overflow-x: auto;
+    border-radius: 12px;
+    box-shadow: var(--box-shadow);
+  }
+  
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 10px;
+  }
+  
+  table th,
+  table td {
+    padding: 15px;
+    text-align: left;
+    border: 1px solid var(--border-light);
+  }
+  
+  table th {
+    background: var(--bg-table-header);
+    color: var(--text-highlight);
+    text-transform: uppercase;
+  }
+  
+  table td {
+    background: var(--bg-table-row);
+    color: var(--text-main);
+  }
+  
+  table tr:hover td {
+   
+
+    transition: background-color var(--transition), color var(--transition);
+  }
+  
+  .btn {
+    display: inline-block;
+    padding: 8px 16px;
+    color: var(--text-main);
+    background: var(--text-highlight);
+    border: none;
+    border-radius: 8px;
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: transform var(--transition), box-shadow var(--transition);
+  }
+  
+  .btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 4px 15px hsla(45, 100%, 72%, 0.3);
+  }
+  
+  img {
+    border-radius: 8px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    max-width: 50px;
+    height: auto;
+  }
+  
+  .form-group {
+    margin-bottom: 15px;
+  }
+  
+  .form-group label {
+    display: block;
+    font-weight: bold;
+    margin-bottom: 5px;
+    color: var(--text-highlight);
+  }
+  
+  .form-group input {
+    width: 100%;
+    padding: 10px;
+    border-radius: 8px;
+    border: 1px solid var(--border-light);
+    background: var(--bg-content);
+    color: var(--text-main);
+    transition: border-color var(--transition);
+  }
+  
+  .form-group input:focus {
+    border-color: var(--text-highlight);
+    outline: none;
+  }
+  
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+      transform: translateY(10px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+</style>
+<audio id="audio" autoplay loop>
+  <source src="./sounds/music.me.mp3" type="audio/mp3">
+</audio>
+<script>
+  window.onload = function() {
+      var audio = document.getElementById('audio');
+      audio.play();
+  }
+</script>

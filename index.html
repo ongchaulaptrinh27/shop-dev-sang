@@ -1,0 +1,1259 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Portfolio - By Tiendev</title>
+
+  <!--
+    - favicon
+  -->
+  <link rel="shortcut icon" href="./assets/images/logo.ico" type="image/x-icon" />
+
+  <!--
+    - custom css link
+  -->
+  <link rel="stylesheet" href="./assets/css/style.css" />
+
+  <!--
+    - google font link
+  -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet" />
+</head>
+
+<body>
+  <header>
+    <nav>
+      <div class="nav-container">
+        <h1>sàn dev</h1>
+        <div id="auth-section">
+          <div class="btn-login-register" id="btn-login-register">
+            <button style="text-align: center" class="btn btn-login">Login</button>
+            <button style="text-align: center" class="btn btn-register">Register</button>
+          </div>
+          <div id="user-info" style="display: none; position: relative">
+            <span id="user-name"></span>
+            <span id="user-balance" style="margin-left: 10px; font-weight: bold;">Số tiền: 0 VND</span>
+            <img id="user-icon" src="user.jpg" alt="User Icon" class="user-icon">
+            <div id="user-menu" class="dropdown-menu" style="display: none;">
+              <button id="profile-btn" class="dropdown-item">Trang cá nhân</button>
+              <button id="naptien-btn" class="dropdown-item">Nạp tiền</button>
+              <button id="logout-btn" class="dropdown-item">Logout</button>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </nav>
+  </header>
+
+  <!-- Modal Login/Register -->
+  <div id="auth-modal" class="auth-modal">
+    <div class="auth-modal-content">
+      <span class="auth-close-btn" id="close-auth-modal">&times;</span>
+      <div class="auth-tabs">
+        <button class="auth-tab active" data-target="login-form">
+          Login
+        </button>
+        <button class="auth-tab" data-target="register-form">Register</button>
+      </div>
+      <div class="auth-forms">
+        <!-- Login Form -->
+        <form id="login-form" class="auth-form active">
+          <h2>Login</h2>
+          <label for="login-email">Email:</label>
+          <input type="email" id="login-email" placeholder="Enter your email" required />
+          <label for="login-password">Password:</label>
+          <div class="password-container">
+            <input type="password" id="login-password" placeholder="Enter your password" required />
+            <ion-icon name="eye-off-outline" id="toggle-login-password" class="toggle-password"></ion-icon>
+          </div>
+          <button type="submit" class="auth-btn">Login</button>
+        </form>
+
+        <!-- Register Form -->
+        <form id="register-form" class="auth-form">
+          <h2>Register</h2>
+          <label for="register-name">Name:</label>
+          <input type="text" id="register-name" placeholder="Enter your name" required />
+          <label for="register-email">Email:</label>
+          <input type="email" id="register-email" placeholder="Enter your email" required />
+          <label for="register-password">Password:</label>
+          <div class="password-container">
+            <input type="password" id="register-password" placeholder="Enter your password" required />
+            <ion-icon name="eye-off-outline" id="toggle-register-password" class="toggle-password"></ion-icon>
+          </div>
+          <button type="submit" class="auth-btn">Register</button>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <!--
+    - #MAIN
+  -->
+
+  <main>
+    <!--
+      - #SIDEBAR
+    -->
+
+    <aside class="sidebar" data-sidebar>
+      <div class="sidebar-info">
+        <figure class="avatar-box">
+          <img src="./assets/images/my-avatar.png" alt="Richard hanrick" width="80" />
+        </figure>
+
+        <div class="info-content">
+          <h1 class="name" title="Richard hanrick">nguyen hong sang</h1>
+
+          <p class="title">Web developer</p>
+        </div>
+
+        <button class="info_more-btn" data-sidebar-btn>
+          <span>Show Contacts</span>
+
+          <ion-icon name="chevron-down"></ion-icon>
+        </button>
+      </div>
+
+      <div class="sidebar-info_more">
+        <div class="separator"></div>
+
+        <ul class="contacts-list">
+          <li class="contact-item">
+            <div class="icon-box">
+              <ion-icon name="mail-outline"></ion-icon>
+            </div>
+
+            <div class="contact-info">
+              <p class="contact-title">Email</p>
+
+              <a href="mailto:richard@example.com" class="contact-link">nguyenhongsang0207@gmail.com</a>
+            </div>
+          </li>
+
+          <li class="contact-item">
+            <div class="icon-box">
+              <ion-icon name="phone-portrait-outline"></ion-icon>
+            </div>
+
+            <div class="contact-info">
+              <p class="contact-title">Phone</p>
+
+              <a href="https://zalo.me/0347160155/" class="contact-link">+335764804</a>
+            </div>
+          </li>
+
+          <li class="contact-item">
+            <div class="icon-box">
+              <ion-icon name="calendar-outline"></ion-icon>
+            </div>
+
+            <div class="contact-info">
+              <p class="contact-title">Birthday</p>
+
+              <time datetime="1982-06-23">02-07-20??</time>
+            </div>
+          </li>
+
+          <li class="contact-item">
+            <div class="icon-box">
+              <ion-icon name="location-outline"></ion-icon>
+            </div>
+
+            <div class="contact-info">
+              <p class="contact-title">Location</p>
+
+              <address>thạnh bình-đà đẳng</address>
+            </div>
+          </li>
+        </ul>
+
+        <div class="separator"></div>
+
+        <ul class="social-list">
+          <li class="social-item">
+            <a href="https://www.facebook.com/ongchaulaptrinh27" class="social-link">
+              <ion-icon name="logo-facebook"></ion-icon>
+            </a>
+          </li>
+
+
+          <li class="social-item">
+            <a href="#" class="social-link">
+              <ion-icon name="logo-instagram"></ion-icon>
+            </a>
+          </li>
+          <li class="social-item">
+            <a href="https://www.tiktok.com/@sangnguyendev" class="social-link">
+              <ion-icon name="logo-tiktok"></ion-icon>
+            </a>
+          </li>
+        </ul>
+      </div>
+    </aside>
+
+    <!--
+      - #main-content
+    -->
+
+    <div class="main-content">
+      <!--
+        - #NAVBAR
+      -->
+
+      <nav class="navbar">
+        <ul class="navbar-list">
+          <li class="navbar-item">
+            <button class="navbar-link active" data-nav-link>About</button>
+          </li>
+
+          <!-- <li class="navbar-item">
+              <button class="navbar-link" data-nav-link>Resume</button>
+            </li> -->
+
+          <li class="navbar-item">
+            <button class="navbar-link" data-nav-link>Source code</button>
+          </li>
+
+          <!-- <li class="navbar-item">
+              <button class="navbar-link" data-nav-link>Blog</button>
+            </li>
+
+            <li class="navbar-item">
+              <button class="navbar-link" data-nav-link>Contact</button>
+            </li> -->
+        </ul>
+      </nav>
+
+      <!--
+        - #ABOUT
+      -->
+
+      <article class="about active" data-page="about">
+        <header>
+          <h2 class="h2 article-title">About me</h2>
+        </header>
+
+        <section class="about-text">
+          <p>Tình yêu anh dành cho em chỉ có một. Em yêu ạ !</p>
+
+          <a href="cập nhật sau">
+            <p>Quà anh dành tặng em. 👉👉 Nó ở đây.</p>
+          </a>
+        </section>
+
+        <!--
+          - service
+        -->
+
+        
+            <li class="service-item">
+              <div class="service-icon-box">
+                <img src="./assets/images/icon-dev.svg" alt="Web development icon" width="40" />
+              </div>
+
+              <div class="service-content-box">
+                <h4 class="h4 service-item-title">wedste</h4>
+
+                <p class="service-item-text">
+                 làm game trên pc và tất cả app
+                </p>
+              </div>
+            </li>
+
+            <li class="service-item">
+              <div class="service-icon-box">
+                <img src="./assets/images/icon-app.svg" alt="mobile app icon" width="40" />
+              </div>
+
+              <div class="service-content-box">
+                <h4 class="h4 service-item-title">trên điện thoại</h4>
+
+                <p class="service-item-text">
+                 
+                  làm tool làm wed trên điện thoại cả android và ios
+                </p>
+              </div>
+            </li>
+
+            
+          </ul>
+        </section>
+
+       
+        <!--
+          - testimonials modal
+        -->
+
+        <div class="modal-container" data-modal-container>
+          <div class="overlay" data-overlay></div>
+
+          <section class="testimonials-modal">
+            <button class="modal-close-btn" data-modal-close-btn>
+              <ion-icon name="close-outline"></ion-icon>
+            </button>
+
+            <div class="modal-img-wrapper">
+              <figure class="modal-avatar-box">
+                <img src="./assets/images/avatar-1.png" alt="Daniel lewis" width="80" data-modal-img />
+              </figure>
+
+              <img src="./assets/images/icon-quote.svg" alt="quote icon" />
+            </div>
+
+            <div class="modal-content">
+              <h4 class="h3 modal-title" data-modal-title>Daniel lewis</h4>
+
+              <time datetime="2021-06-14">14 June, 2021</time>
+
+              <div data-modal-text>
+                <p>
+                  Richard was hired to create a corporate identity. We were
+                  very pleased with the work done. She has a lot of experience
+                  and is very concerned about the needs of client. Lorem ipsum
+                  dolor sit amet, ullamcous cididt consectetur adipiscing
+                  elit, seds do et eiusmod tempor incididunt ut laborels
+                  dolore magnarels alia.
+                </p>
+              </div>
+            </div>
+          </section>
+        </div>
+
+        <!--
+          - clients
+        -->
+
+        <section class="clients">
+          <h3 class="h3 clients-title">Clients</h3>
+
+          <ul class="clients-list has-scrollbar">
+            <li class="clients-item">
+              <a  >
+                <img src="./assets/images/logo-1-color.png" alt="client logo" />
+              </a>
+            </li>
+
+            <li class="clients-item">
+              <a >
+                <img src="./assets/images/logo-2-color.png" alt="client logo" />
+              </a>
+            </li>
+
+            <li class="clients-item">
+              <a >
+                <img src="./assets/images/logo-3-color.png" alt="client logo" />
+              </a>
+            </li>
+
+            <li class="clients-item">
+              <a >
+                <img src="./assets/images/logo-4-color.png" alt="client logo" />
+              </a>
+            </li>
+
+            <li class="clients-item">
+              <a >
+                <img src="./assets/images/logo-5-color.png" alt="client logo" />
+              </a>
+            </li>
+
+            <li class="clients-item">
+              <a >
+                <img src="./assets/images/logo-6-color.png" alt="client logo" />
+              </a>
+            </li>
+          </ul>
+        </section>
+      </article>
+
+      <!--
+
+        - #SOURCE CODE
+      -->
+
+      <article class="portfolio" data-page="source code">
+        <header>
+          <h2 class="h2 article-title">Source Code</h2>
+        </header>
+
+        <section class="projects">
+          <ul class="filter-list">
+            <li class="filter-item">
+              <button class="active" data-filter-btn>All</button>
+            </li>
+          </ul>
+
+          <div class="filter-select-box">
+            <button class="filter-select" data-select>
+              <div class="select-value" data-selecct-value>
+                Select category
+              </div>
+
+              <div class="select-icon">
+                <ion-icon name="chevron-down"></ion-icon>
+              </div>
+            </button>
+
+            <ul class="select-list">
+              <li class="select-item">
+                <button data-select-item>All</button>
+              </li>
+
+              <!-- <li class="select-item">
+                  <button data-select-item>Web design</button>
+                </li>
+
+                <li class="select-item">
+                  <button data-select-item>Applications</button>
+                </li>
+
+                <li class="select-item">
+                  <button data-select-item>Web development</button>
+                </li> -->
+            </ul>
+          </div>
+
+          <ul class="project-list">
+            <!-- các phần tử chuyển xuống phần JS -->
+          </ul>
+        </section>
+      </article>
+
+
+      <p>Copyright &copy; 2025 Website được phát triển bởi sang dev.</p>
+    </div>
+  </main>
+
+  <!-- Modal -->
+  <div id="imageModal" class="modal">
+    <div class="overlay" onclick="closeModal()"></div>
+    <!-- Thêm overlay này -->
+    <span class="close" onclick="closeModal()">&times;</span>
+    <img class="modal-content" id="modalImage" />
+  </div>
+  <!--
+    - custom js link
+  -->
+  <script src="./assets/js/script.js"></script>
+
+  <!--
+    - ionicon link
+  -->
+  <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+  <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+  <!-- Thêm SweetAlert2 từ CDN -->
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+</body>
+
+<script>
+  function openModal(imageSrc) {
+    const modal = document.getElementById("imageModal");
+    const modalImage = document.getElementById("modalImage");
+
+    // Hiện modal và thiết lập hình ảnh trong modal
+    modal.style.display = "block";
+    modalImage.src = imageSrc; // Đặt hình ảnh cho modal
+
+    // Áp dụng lớp 'show' để hiện hiệu ứng
+    setTimeout(() => {
+      modal.classList.add("show");
+    }, 10);
+  }
+
+  function closeModal() {
+    const modal = document.getElementById("imageModal");
+
+    // Gỡ bỏ lớp 'show' để kích hoạt hiệu ứng mờ dần
+    modal.classList.remove("show");
+
+    // Ẩn modal sau hiệu ứng
+    setTimeout(() => {
+      modal.style.display = "none";
+    }, 500);
+  }
+</script>
+
+
+
+
+<script>
+  document.addEventListener("DOMContentLoaded", () => {
+    const productContainer = document.querySelector(".project-list");
+
+    const getProducts = () =>
+      JSON.parse(localStorage.getItem("products")) || [];
+
+    const renderProducts = () => {
+      const products = getProducts();
+      productContainer.innerHTML = products
+        .map(
+          (product) => `
+          <li class="project-item active" data-filter-item data-category="${product.category
+            }">
+            <a class="project-link">
+              <figure class="project-img">
+                <div class="project-item-icon-box" onclick="openModal('${product.image
+            }')">
+                  <ion-icon name="eye-outline"></ion-icon>
+                </div>
+                <img src="${product.image}" alt="${product.title}" loading="lazy" class="project-image"/>
+              </figure>
+              <h3 class="project-title">${product.title}</h3>
+              <span class="project-title" style="
+                    font-size: 16px;
+                    color: #666;
+                    left: 10em;
+                    position: absolute;
+                    top: 13em;
+                  ">ID: ${product.id}</span>
+            
+              <p class="project-category">${product.category}</p>
+  
+              <button class="buy-button"  onclick="buyCode('${product.id}', '${product.image}', '${product.title}', '${product.price}')">
+                Buy
+              </button>
+            </a>
+            <span style="
+                  position: relative;
+                  left: 144px;
+                  bottom: 37px;
+                  font-size: 20px;
+                ">${parseInt(product.price).toLocaleString()} VND</span>
+          </li>
+        `
+        )
+        .join("");
+    };
+
+    renderProducts();
+  });
+</script>
+
+<script>
+  document.addEventListener("DOMContentLoaded", () => {
+    const modal = document.getElementById("auth-modal");
+    const closeModal = document.getElementById("close-auth-modal");
+    const tabs = document.querySelectorAll(".auth-tab");
+    const forms = document.querySelectorAll(".auth-form");
+
+    const toggleLoginPassword = document.getElementById(
+      "toggle-login-password"
+    );
+    const loginPasswordInput = document.getElementById("login-password");
+
+    const toggleRegisterPassword = document.getElementById(
+      "toggle-register-password"
+    );
+    const registerPasswordInput =
+      document.getElementById("register-password");
+
+    // Hiển thị modal ngay khi vào trang
+    modal.style.display = "flex";
+
+    // Đóng modal
+    closeModal.addEventListener("click", () => {
+      modal.style.display = "none";
+    });
+
+    // Chuyển đổi giữa Login và Register
+    tabs.forEach((tab) => {
+      tab.addEventListener("click", () => {
+        tabs.forEach((t) => t.classList.remove("active"));
+        forms.forEach((f) => f.classList.remove("active"));
+
+        tab.classList.add("active");
+        document.getElementById(tab.dataset.target).classList.add("active");
+      });
+    });
+
+    // Ẩn/hiện mật khẩu cho Login
+    toggleLoginPassword.addEventListener("click", () => {
+      if (loginPasswordInput.type === "password") {
+        loginPasswordInput.type = "text";
+        toggleLoginPassword.setAttribute("name", "eye-outline");
+      } else {
+        loginPasswordInput.type = "password";
+        toggleLoginPassword.setAttribute("name", "eye-off-outline");
+      }
+    });
+
+    // Ẩn/hiện mật khẩu cho Register
+    toggleRegisterPassword.addEventListener("click", () => {
+      if (registerPasswordInput.type === "password") {
+        registerPasswordInput.type = "text";
+        toggleRegisterPassword.setAttribute("name", "eye-outline");
+      } else {
+        registerPasswordInput.type = "password";
+        toggleRegisterPassword.setAttribute("name", "eye-off-outline");
+      }
+    });
+  });
+</script>
+
+<script>
+  document.addEventListener("DOMContentLoaded", () => {
+    const modal = document.getElementById("auth-modal");
+    const btnLoginRegister = document.getElementById("btn-login-register");
+    const userInfo = document.getElementById("user-info");
+    const userNameSpan = document.getElementById("user-name");
+
+    // Tài khoản admin mặc định
+    const adminAccount = { email: "admin@gmail.com", password: "admin123", role: "admin" };
+
+    const getAccounts = () => JSON.parse(localStorage.getItem("accounts")) || [];
+    const saveAccounts = (accounts) => localStorage.setItem("accounts", JSON.stringify(accounts));
+
+    const accounts = getAccounts();
+
+    // Thêm tài khoản admin mặc định nếu chưa tồn tại
+    if (!accounts.some((acc) => acc.email === adminAccount.email)) {
+      accounts.push(adminAccount);
+      saveAccounts(accounts);
+    }
+
+    // Kiểm tra trạng thái đăng nhập khi tải trang
+    const currentUser = JSON.parse(localStorage.getItem("currentUser"));
+    if (currentUser) {
+      btnLoginRegister.style.display = "none";  // Ẩn nút login/register
+      userInfo.style.display = "block";         // Hiển thị thông tin user
+      userNameSpan.textContent = `Welcome, ${currentUser.name}`;
+
+    }
+
+    // Mở modal khi nhấn vào Login hoặc Register
+    const openModal = (formType) => {
+      modal.style.display = "block";
+      document.querySelectorAll(".auth-form").forEach(form => form.classList.remove("active"));
+      document.getElementById(`${formType}-form`).classList.add("active");
+    };
+
+    const closeModalHandler = () => {
+      modal.style.display = "none"; // Đóng modal
+    };
+
+    document.querySelector(".btn-login").addEventListener("click", () => openModal("login"));
+    document.querySelector(".btn-register").addEventListener("click", () => openModal("register"));
+    document.getElementById("close-auth-modal").addEventListener("click", closeModalHandler);
+
+    // Xử lý đăng ký
+    document.getElementById("register-form").addEventListener("submit", (e) => {
+      e.preventDefault();
+      const name = document.getElementById("register-name").value.trim();
+      const email = document.getElementById("register-email").value.trim();
+      const password = document.getElementById("register-password").value.trim();
+
+      if (accounts.some((acc) => acc.email === email)) {
+        Swal.fire({
+          icon: "error",
+          title: "Registration Failed",
+          text: "This email is already registered.",
+        }).then(() => {
+          modal.style.display = "block"; // Hiện lại modal và form đăng ký khi có thông báo thất bại
+          document.getElementById("register-form").classList.add("active");
+        });
+        return;
+      }
+
+      accounts.push({ name, email, password, role: "user" });
+      saveAccounts(accounts);
+      Swal.fire({
+        icon: "success",
+        title: "Registration Successful",
+        text: "You can now log in.",
+      }).then(() => {
+        closeModalHandler(); // Đóng modal khi đăng ký thành công
+      });
+    });
+
+    // Xử lý đăng nhập
+    document.getElementById("login-form").addEventListener("submit", (e) => {
+      e.preventDefault();
+      const email = document.getElementById("login-email").value.trim();
+      const password = document.getElementById("login-password").value.trim();
+      const account = accounts.find((acc) => acc.email === email && acc.password === password);
+
+      if (!account) {
+        Swal.fire({
+          icon: "error",
+          title: "Login Failed",
+          text: "Invalid email or password.",
+        });
+        return;
+      }
+
+      if (account.role === "admin") {
+        Swal.fire({
+          icon: "success",
+          title: "Welcome, Admin!",
+          text: "Redirecting to admin dashboard...",
+          timer: 1500,
+          showConfirmButton: false,
+        }).then(() => {
+          localStorage.setItem("currentUser", JSON.stringify(account));
+          window.location.href = "admin.html";  // Chuyển đến admin dashboard
+        });
+      } else {
+        Swal.fire({
+          icon: "success",
+          title: `Welcome, ${account.name}!`,
+          text: "You are now logged in.",
+        }).then(() => {
+          localStorage.setItem("currentUser", JSON.stringify(account));
+          btnLoginRegister.style.display = "none";
+          userInfo.style.display = "block";
+          userNameSpan.textContent = `Welcome, ${account.name}`;
+
+        });
+      }
+    });
+
+    // Xử lý đăng xuất
+    document.getElementById("logout-btn").addEventListener("click", () => {
+      Swal.fire({
+        icon: "success",
+        title: "Logged Out",
+        text: "You have successfully logged out.",
+      }).then(() => {
+        localStorage.removeItem("currentUser");
+        location.reload();
+      });
+    });
+  });
+
+</script>
+
+<script>
+  // Lấy các nút và modal
+  const loginButton = document.querySelector(".btn-login");
+  const registerButton = document.querySelector(".btn-register");
+  const authModal = document.getElementById("auth-modal");
+  const closeAuthModal = document.getElementById("close-auth-modal");
+  const loginFormTab = document.querySelector(
+    '.auth-tab[data-target="login-form"]'
+  );
+  const registerFormTab = document.querySelector(
+    '.auth-tab[data-target="register-form"]'
+  );
+
+  // Khi nhấn vào nút Login
+  loginButton.addEventListener("click", function () {
+    authModal.style.display = "flex";
+    authModal.style.opacity = "1";
+    authModal.style.visibility = "visible";
+
+    loginFormTab.classList.add("active");
+    registerFormTab.classList.remove("active");
+    document.getElementById("login-form").classList.add("active");
+    document.getElementById("register-form").classList.remove("active");
+  });
+
+  // Khi nhấn vào nút Register
+  registerButton.addEventListener("click", function () {
+    authModal.style.display = "flex";
+    authModal.style.opacity = "1";
+    authModal.style.visibility = "visible";
+
+    registerFormTab.classList.add("active");
+    loginFormTab.classList.remove("active");
+    document.getElementById("register-form").classList.add("active");
+    document.getElementById("login-form").classList.remove("active");
+  });
+
+  // Đóng modal khi nhấn vào nút đóng
+  closeAuthModal.addEventListener("click", function () {
+    authModal.style.display = "none";
+    authModal.style.opacity = "0";
+    authModal.style.visibility = "hidden";
+  });
+
+  // Tab chuyển đổi giữa Login và Register
+  document.querySelectorAll(".auth-tab").forEach((tab) => {
+    tab.addEventListener("click", function () {
+      document
+        .querySelectorAll(".auth-tab")
+        .forEach((t) => t.classList.remove("active"));
+      document
+        .querySelectorAll(".auth-form")
+        .forEach((f) => f.classList.remove("active"));
+      this.classList.add("active");
+      document
+        .getElementById(this.getAttribute("data-target"))
+        .classList.add("active");
+    });
+  });
+</script>
+
+
+
+<script>
+  document.addEventListener("DOMContentLoaded", () => {
+    const userIcon = document.getElementById("user-icon");
+    const userMenu = document.getElementById("user-menu");
+    const logoutBtn = document.getElementById("logout-btn");
+    const btnLoginRegister = document.getElementById("btn-login-register");
+    const userInfo = document.getElementById("user-info");
+
+    // Hiển thị/Ẩn menu khi nhấn vào logo user
+    userIcon.addEventListener("click", () => {
+      userMenu.style.display =
+        userMenu.style.display === "block" ? "none" : "block";
+    });
+
+    // Đăng xuất
+    logoutBtn.addEventListener("click", () => {
+      Swal.fire({
+        icon: "success",
+        title: "Logged Out",
+        text: "You have successfully logged out.",
+      }).then(() => {
+        // Quay lại trạng thái ban đầu
+        btnLoginRegister.style.display = "flex";
+        userInfo.style.display = "none";
+        localStorage.removeItem("currentUser"); // Xóa thông tin người dùng hiện tại
+      });
+    });
+
+    // Ẩn menu khi click ra ngoài
+    document.addEventListener("click", (e) => {
+      if (!userInfo.contains(e.target)) {
+        userMenu.style.display = "none";
+      }
+    });
+  });
+</script>
+
+<script>
+  document.addEventListener("DOMContentLoaded", () => {
+    const modal = document.getElementById("auth-modal");
+    const closeModal = document.getElementById("close-auth-modal");
+    const loginButton = document.querySelector(".btn-login");
+    const registerButton = document.querySelector(".btn-register");
+
+    const openModal = (formType) => {
+      document.body.classList.add("modal-active");
+
+      // Kích hoạt form tương ứng
+      if (formType === "login") {
+        document.getElementById("login-form").classList.add("active");
+        document.getElementById("register-form").classList.remove("active");
+      } else {
+        document.getElementById("register-form").classList.add("active");
+        document.getElementById("login-form").classList.remove("active");
+      }
+    };
+
+    const closeModalHandler = () => {
+      document.body.classList.remove("modal-active");
+    };
+
+    loginButton.addEventListener("click", () => openModal("login"));
+    registerButton.addEventListener("click", () => openModal("register"));
+    closeModal.addEventListener("click", closeModalHandler);
+
+    // Đóng modal khi nhấn vào bên ngoài modal
+    window.addEventListener("click", (e) => {
+      if (e.target === modal) {
+        closeModalHandler();
+      }
+    });
+  });
+</script>
+
+
+<script>
+
+  document.addEventListener("DOMContentLoaded", () => {
+    const modal = document.getElementById("auth-modal");
+    const closeModal = document.getElementById("close-auth-modal");
+    const loginButton = document.querySelector(".btn-login");
+    const registerButton = document.querySelector(".btn-register");
+    const forms = document.querySelectorAll(".auth-form"); // Lấy tất cả các form
+
+    // Đặt modal và form về trạng thái ban đầu
+    modal.style.display = "none"; // Ẩn modal
+    forms.forEach((form) => form.classList.remove("active")); // Xóa trạng thái active của form
+
+    // Hiển thị modal khi nhấn Login hoặc Register
+    const openModal = (formType) => {
+      modal.style.display = "flex";
+      forms.forEach((form) => form.classList.remove("active")); // Đặt lại tất cả các form
+      document.getElementById(`${formType}-form`).classList.add("active"); // Kích hoạt form tương ứng
+    };
+
+    // Đóng modal
+    const closeModalHandler = () => {
+      modal.style.display = "none";
+      forms.forEach((form) => form.classList.remove("active")); // Đặt lại form về trạng thái ban đầu
+    };
+
+    // Gắn sự kiện cho các nút Login và Register
+    loginButton.addEventListener("click", () => openModal("login"));
+    registerButton.addEventListener("click", () => openModal("register"));
+    closeModal.addEventListener("click", closeModalHandler);
+
+    // Đóng modal khi nhấn ra ngoài modal
+    window.addEventListener("click", (e) => {
+      if (e.target === modal) {
+        closeModalHandler();
+      }
+    });
+  });
+
+
+</script>
+
+
+<script>
+  document.addEventListener("DOMContentLoaded", () => {
+    const modal = document.getElementById("auth-modal");
+    const closeModalButton = document.getElementById("close-auth-modal");
+    const loginButton = document.querySelector(".btn-login");
+    const registerButton = document.querySelector(".btn-register");
+    const btnLoginRegister = document.getElementById("btn-login-register");
+    const userInfo = document.getElementById("user-info");
+    const userNameSpan = document.getElementById("user-name");
+    const loginForm = document.getElementById("login-form");
+    const registerForm = document.getElementById("register-form");
+    const accountsKey = "accounts";
+    const currentUserKey = "currentUser";
+
+    // Quản lý tài khoản
+    const getAccounts = () => JSON.parse(localStorage.getItem(accountsKey)) || [];
+    const saveAccounts = (accounts) => localStorage.setItem(accountsKey, JSON.stringify(accounts));
+    const accounts = getAccounts();
+
+    // Thêm tài khoản admin mặc định nếu chưa tồn tại
+    const adminAccount = { email: "admin@gmail.com", password: "admin123", role: "admin" };
+    if (!accounts.some((acc) => acc.email === adminAccount.email)) {
+      accounts.push(adminAccount);
+      saveAccounts(accounts);
+    }
+
+    // Kiểm tra trạng thái đăng nhập khi tải trang
+    const currentUser = JSON.parse(localStorage.getItem(currentUserKey));
+    if (currentUser) {
+      updateUserUI(currentUser);
+    }
+
+    // Hàm mở modal
+    const openModal = (formType) => {
+      modal.style.display = "flex";
+      modal.style.opacity = "1";
+      modal.style.visibility = "visible";
+      resetForms();
+      document.getElementById(`${formType}-form`).classList.add("active");
+    };
+
+    // Hàm đóng modal
+    const closeModal = () => {
+      modal.style.opacity = "0";
+      modal.style.visibility = "hidden";
+      setTimeout(() => {
+        modal.style.display = "none";
+      }, 300); // Đồng bộ với thời gian CSS transition
+    };
+
+    // Hàm đặt lại trạng thái form
+    const resetForms = () => {
+      document.querySelectorAll(".auth-form").forEach((form) => form.classList.remove("active"));
+    };
+
+    // Hàm cập nhật giao diện người dùng sau khi đăng nhập
+    const updateUserUI = (user) => {
+      btnLoginRegister.style.display = "none";
+      userInfo.style.display = "flex";
+      userNameSpan.textContent = `Welcome, ${user.name}`;
+    };
+
+    // Xử lý đăng ký
+    registerForm.addEventListener("submit", (e) => {
+      e.preventDefault();
+      const name = document.getElementById("register-name").value.trim();
+      const email = document.getElementById("register-email").value.trim();
+      const password = document.getElementById("register-password").value.trim();
+
+      if (accounts.some((acc) => acc.email === email)) {
+        Swal.fire({
+          icon: "error",
+          title: "Registration Failed",
+          text: "This email is already registered.",
+        });
+        return;
+      }
+
+      accounts.push({ name, email, password, role: "user" });
+      saveAccounts(accounts);
+
+      Swal.fire({
+        icon: "success",
+        title: "Registration Successful",
+        text: "You can now log in.",
+      }).then(() => openModal("login"));
+    });
+
+    // Xử lý đăng nhập
+    loginForm.addEventListener("submit", (e) => {
+      e.preventDefault();
+      const email = document.getElementById("login-email").value.trim();
+      const password = document.getElementById("login-password").value.trim();
+      const account = accounts.find((acc) => acc.email === email && acc.password === password);
+
+      if (!account) {
+        Swal.fire({
+          icon: "error",
+          title: "Login Failed",
+          text: "Invalid email or password.",
+        });
+        return;
+      }
+
+      Swal.fire({
+        icon: "success",
+        title: `Welcome, ${account.name}!`,
+        text: "You are now logged in.",
+        timer: 1500,
+        showConfirmButton: false,
+      }).then(() => {
+        // Lưu trạng thái người dùng
+        localStorage.setItem(currentUserKey, JSON.stringify(account));
+
+        // Cập nhật giao diện
+        updateUserUI(account);
+
+        // Đóng modal và làm mới trang
+        setTimeout(() => {
+          closeModal(); // Đóng modal
+          location.reload(); // Làm mới trang sau 1 giây
+        }, 300); // 1 giây delay để người dùng xem thông báo
+      });
+    });
+
+    // Xử lý đăng xuất
+    document.getElementById("logout-btn").addEventListener("click", () => {
+      Swal.fire({
+        icon: "success",
+        title: "Logged Out",
+        text: "You have successfully logged out.",
+      }).then(() => {
+        localStorage.removeItem(currentUserKey);
+        location.reload(); // Làm mới trang để đặt lại trạng thái giao diện
+      });
+    });
+
+    // Sự kiện cho nút mở modal
+    loginButton.addEventListener("click", () => openModal("login"));
+    registerButton.addEventListener("click", () => openModal("register"));
+    closeModalButton.addEventListener("click", closeModal);
+
+    // Đóng modal khi nhấn ra ngoài modal
+    window.addEventListener("click", (e) => {
+      if (e.target === modal) {
+        closeModal();
+      }
+    });
+  });
+
+
+</script>
+
+<!-- làm phần cộng tiền cho user -->
+<script>
+  document.addEventListener("DOMContentLoaded", () => {
+    const profileBtn = document.getElementById("profile-btn");
+
+    // Xử lý khi nhấn vào "Trang cá nhân"
+    profileBtn.addEventListener("click", () => {
+      window.location.href = "user.html";
+    });
+  });
+
+
+</script>
+
+<script>
+  document.addEventListener("DOMContentLoaded", () => {
+    const btnLoginRegister = document.getElementById("btn-login-register");
+    const userInfo = document.getElementById("user-info");
+    const userNameSpan = document.getElementById("user-name");
+    const userBalanceSpan = document.getElementById("user-balance");
+
+    const getAccounts = () => JSON.parse(localStorage.getItem("accounts")) || [];
+    const saveAccounts = (accounts) => localStorage.setItem("accounts", JSON.stringify(accounts));
+    const accounts = getAccounts();
+
+    const currentUser = JSON.parse(localStorage.getItem("currentUser"));
+    if (currentUser) {
+      btnLoginRegister.style.display = "none";
+      userInfo.style.display = "flex";
+      userNameSpan.textContent = `Welcome, ${currentUser.name}`;
+      userBalanceSpan.textContent = `Số tiền: ${currentUser.balance || 0} VND`;
+    }
+
+    document.getElementById("register-form").addEventListener("submit", (e) => {
+      e.preventDefault();
+      const name = document.getElementById("register-name").value.trim();
+      const email = document.getElementById("register-email").value.trim();
+      const password = document.getElementById("register-password").value.trim();
+
+      if (accounts.some((acc) => acc.email === email)) {
+        Swal.fire("Error", "This email is already registered.", "error");
+        return;
+      }
+
+      accounts.push({ name, email, password, role: "user", balance: 0 });
+      saveAccounts(accounts);
+      Swal.fire("Success", "Registration successful. You can now log in.", "success");
+    });
+
+    document.getElementById("login-form").addEventListener("submit", (e) => {
+      e.preventDefault();
+      const email = document.getElementById("login-email").value.trim();
+      const password = document.getElementById("login-password").value.trim();
+      const account = accounts.find((acc) => acc.email === email && acc.password === password);
+
+      if (!account) {
+        Swal.fire("Error", "Invalid email or password.", "error");
+        return;
+      }
+
+      localStorage.setItem("currentUser", JSON.stringify(account));
+      btnLoginRegister.style.display = "none";
+      userInfo.style.display = "flex";
+      userNameSpan.textContent = `Welcome, ${account.name}`;
+      userBalanceSpan.textContent = `Số tiền: ${account.balance || 0} VND`;
+      Swal.fire("Success", "Login successful.", "success");
+    });
+
+    document.getElementById("logout-btn").addEventListener("click", () => {
+      localStorage.removeItem("currentUser");
+      location.reload();
+    });
+  });
+</script>
+
+
+<script>
+  document.addEventListener("DOMContentLoaded", () => {
+    const btnLoginRegister = document.getElementById("btn-login-register");
+    const userInfo = document.getElementById("user-info");
+    const userNameSpan = document.getElementById("user-name");
+    const userBalanceSpan = document.getElementById("user-balance");
+    const naptienBtn = document.getElementById("naptien-btn");
+    const logoutBtn = document.getElementById("logout-btn");
+    // Xử lý nạp tiền
+    naptienBtn.addEventListener("click", () => {
+      window.location.href = "naptien.html";
+    });
+
+  });
+</script>
+<!-- xử lí đơn hàng mua -->
+
+<script>
+  function buyCode(id, image, title, price) {
+  const currentUser = JSON.parse(localStorage.getItem("currentUser"));
+  const accounts = JSON.parse(localStorage.getItem("accounts")) || [];
+
+  if (!currentUser) {
+    Swal.fire({
+      icon: "warning",
+      title: "Bạn cần đăng nhập!",
+      text: "Vui lòng đăng nhập để mua code.",
+    });
+    return;
+  }
+
+  const userBalance = parseInt(currentUser.balance) || 0;
+  const codePrice = parseInt(price);
+
+  if (userBalance < codePrice) {
+    Swal.fire({
+      icon: "error",
+      title: "Không đủ tiền!",
+      text: "Số dư của bạn không đủ để mua code này.",
+    });
+    return;
+  }
+
+  Swal.fire({
+    title: `Bạn có muốn mua code ${title} với giá ${codePrice.toLocaleString()} VND?`,
+    icon: "question",
+    showCancelButton: true,
+    confirmButtonText: "Có",
+    cancelButtonText: "Không",
+  }).then((result) => {
+    if (result.isConfirmed) {
+      // Trừ tiền
+      currentUser.balance = userBalance - codePrice;
+
+      // Cập nhật số dư trong danh sách tài khoản
+      const accountIndex = accounts.findIndex(account => account.email === currentUser.email);
+      if (accountIndex !== -1) {
+        accounts[accountIndex].balance = currentUser.balance;
+        localStorage.setItem("accounts", JSON.stringify(accounts));
+      }
+
+      // Lưu lại thông tin người dùng hiện tại
+      localStorage.setItem("currentUser", JSON.stringify(currentUser));
+
+      // Lưu lịch sử mua hàng
+      const purchaseHistory = JSON.parse(localStorage.getItem("purchaseHistory")) || [];
+      purchaseHistory.push({
+        id,
+        image,
+        title,
+        price: codePrice,
+        downloadLink: getProducts().find((p) => p.id === id)?.downloadLink || "",
+        date: new Date().toLocaleString(),
+      });
+      localStorage.setItem("purchaseHistory", JSON.stringify(purchaseHistory));
+
+      // Hiển thị số dư mới ngay trên web
+      const balanceElement = document.getElementById("user-balance");
+      if (balanceElement) {
+        balanceElement.textContent = `Số tiền: ${currentUser.balance.toLocaleString()} VND`;
+      }
+
+      Swal.fire({
+        icon: "success",
+        title: "Mua thành công!",
+        text: `Code ${title} đã được thêm vào lịch sử mua hàng.`,
+      });
+    } else {
+      Swal.fire({
+        icon: "info",
+        title: "Hủy mua hàng",
+        text: "Bạn đã hủy giao dịch mua code.",
+      });
+    }
+  });
+}
+
+function getProducts() {
+  return JSON.parse(localStorage.getItem("products")) || [];
+}
+
+</script>
+
+
+<audio id="audio" autoplay loop>
+  <source src="./sounds/music.me.mp3" type="audio/mp3">
+</audio>
+<script>
+  window.onload = function() {
+      var audio = document.getElementById('audio');
+      audio.play();
+  }
+</script>
+
+</html>
